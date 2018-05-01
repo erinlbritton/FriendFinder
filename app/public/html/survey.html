@@ -68,27 +68,31 @@
 </html>
 
 <script type="text/javascript">
+// Click event for submitting the survey data
 $(".submit").on("click", function(event) {
     event.preventDefault();
     var scores = [];
     
+    // Grab value from each question in the survey object (survey.js)
     $.each(survey, function(i) {
         scores.push(survey[i].choice);
     })
     
+    // Create an object to pass into the POST
     var newSurvey = {
         name: $("#name").val().trim(),
         photo: $("#imageURL").val().trim(),
         scores: scores,
     };
 
-    console.log(newSurvey);
-
+    // console.log(newSurvey);
+    // POST newSurvey object to the friends API
     $.post("/api/friends", newSurvey, function(data) {
         if (data) {
-            console.log("posted!");
-            console.log(data.name);
-            console.log(data.photo);
+            // console.log("posted!");
+            // console.log(data.name);
+            // console.log(data.photo);
+            // Friend match name and photo are displayed in a modal
             var html = `
                 <div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -113,6 +117,12 @@ $(".submit").on("click", function(event) {
             $("#dynamicModal").on("hidden.bs.modal", function (e) {
                 $(this).remove();
             });
+            // Clear survey inputs
+            $("#name").val("");
+            $("#imageURL").val("");
+            for (var i = 1; i < 11; i++) {
+                $(`input[name='item${i}']`).prop('checked', false);
+            };
         }
     });
 });

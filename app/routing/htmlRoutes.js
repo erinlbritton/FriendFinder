@@ -1,6 +1,7 @@
-
+// Dependency
 var path = require("path");
 
+// Routing to send html; home.html is default
 module.exports = function(app) {
 
     app.get("/home", function(req, res) {
