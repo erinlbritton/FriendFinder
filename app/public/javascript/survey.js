@@ -43,31 +43,3 @@ $.each(survey, function(i) {
         }
     });
 });
-
-function showModal(name, photo) {
-    var html = `
-    <div class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Your Best Match is ${name}!</h4>
-            </div>
-            <div class="modal-body">
-                <img src="${photo}">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->`
-    $('body').append(html);
-    $("#dynamicModal").modal();
-    $("#dynamicModal").modal('show');
-
-    $('#dynamicModal').on('hidden.bs.modal', function (e) {
-        $(this).remove();
-    });
-}
